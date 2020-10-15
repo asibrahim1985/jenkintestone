@@ -5,9 +5,9 @@ pipeline {
 		stage('Build') {
 			steps {
 				echo "Build"
-				sh "PATH - $PATH"
-				sh "BUILD_NUMBER - $env.BUILD_NUMBER"
-				sh "BUILD_TAG - $env.BUILD_TAG"
+				echo "PATH - $PATH"
+				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
+				echo "BUILD_TAG - $env.BUILD_TAG"
 			}
 		}
 	}

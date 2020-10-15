@@ -17,9 +17,28 @@ pipeline {
 				echo "BUILD_TAG - $env.BUILD_TAG"
 			}
 		}
-		stage('Build') {
+		stage('Build Jar') {
 			steps {
 				sh 'mvn clean install'
+			}
+		}
+		stage('Build Image') {
+			steps {
+				//docker -t build -t asibrahim/asimosiprepo:test-jenkins-1.0.0
+				script {
+					dockerImage = docker.build("asibrahim/asimosiprepo:${env.BUILD_TAG}")
+				}
+			}
+		}
+		stage('Push Image') {
+			steps {
+				//docker -t build -t asibrahim/asimosiprepo:test-jenkins-1.0.0
+				script {
+					docker.withRegistry('','dockerhub') {
+						dockerImage.push()
+					}
+					
+				}
 			}
 		}
 	}

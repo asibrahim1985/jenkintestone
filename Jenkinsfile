@@ -44,7 +44,9 @@ pipeline {
 		stage('Deploy Image') {
 			steps {
 				withKubeConfig([credentialsId: 'kubmasternode', serverUrl: '161.97.120.67']) {
-					sh 'kubectl version'
+					script { 
+						sh 'kubectl version'
+					}
 				}
 			}
 		}
